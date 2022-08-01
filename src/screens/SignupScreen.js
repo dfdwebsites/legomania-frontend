@@ -36,11 +36,14 @@ export default function SignupScreen() {
       return;
     }
     try {
-      const { data } = await axios.put('/api/users/signup', {
-        name,
-        email,
-        password
-      });
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_SERVER_URL}/api/users/signup`,
+        {
+          name,
+          email,
+          password
+        }
+      );
       ctxDispatch({ type: 'USER_SIGN_IN', payload: data });
       localStorage.setItem('userInfo', JSON.stringify(data));
       navigate(redirect || '/');

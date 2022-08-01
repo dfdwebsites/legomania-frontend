@@ -45,9 +45,12 @@ export default function OrdersListScreen() {
     const fetchData = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get('/api/users/', {
-          headers: { authorization: `Bearer ${userInfo.token}` }
-        });
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/api/users/`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` }
+          }
+        );
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
@@ -64,9 +67,12 @@ export default function OrdersListScreen() {
     if (window.confirm('Are you sure you want to delete the user?')) {
       try {
         dispatch({ type: 'DELETE_REQUEST' });
-        await axios.delete(`/api/users/${user._id}`, {
-          headers: { authorization: `Bearer ${userInfo.token}` }
-        });
+        await axios.delete(
+          `${process.env.REACT_APP_SERVER_URL}/api/users/${user._id}`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` }
+          }
+        );
         toast.success('User Deleted Successfully');
         dispatch({ type: 'DELETE_SUCCESS' });
       } catch (err) {

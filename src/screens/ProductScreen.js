@@ -76,7 +76,9 @@ export default function ProductScreen() {
     const featchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const result = await axios.get(`/api/products/slug/${slug}`);
+        const result = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/api/products/slug/${slug}`
+        );
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
         setSelectedImage(result.data.image);
       } catch (err) {
@@ -101,7 +103,9 @@ export default function ProductScreen() {
   const addToCartHandler = async () => {
     const existItem = cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`/api/products/${product._id}`);
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/api/products/${product._id}`
+    );
     if (data.countInStock < quantity) {
       window.alert('Sorry, Product is Unavalable at the moment');
       return;
@@ -122,7 +126,7 @@ export default function ProductScreen() {
     try {
       dispatch({ type: 'CREATE_REVIEW_REQUEST' });
       const { data } = await axios.post(
-        `/api/products/${product._id}/reviews`,
+        `${process.env.REACT_APP_SERVER_URL}/api/products/${product._id}/reviews`,
         {
           rating,
           comment,

@@ -50,9 +50,12 @@ export default function SignupScreen() {
     const fetchUser = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/users/${userId}`, {
-          headers: { authorization: `Bearer ${userInfo.token}` }
-        });
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/api/users/${userId}`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` }
+          }
+        );
         setName(data.name);
         setEmail(data.email);
         setIsAdmin(data.isAdmin);
@@ -71,7 +74,7 @@ export default function SignupScreen() {
       dispatch({ type: 'UPDATE_REQUEST' });
 
       await axios.put(
-        `/api/users/${userId}`,
+        `${process.env.REACT_APP_SERVER_URL}/api/users/${userId}`,
         {
           _id: userId,
           name,

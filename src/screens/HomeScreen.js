@@ -40,7 +40,9 @@ export default function HomeScreen() {
     const fetchdata = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const result = await axios.get('/api/products');
+        const result = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/api/products`
+        );
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: err.message });

@@ -35,9 +35,12 @@ export default function OrderHistoryScreen() {
     const fetchOrders = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get('/api/orders/mine', {
-          headers: { authorization: `Bearer ${userInfo.token}` }
-        });
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/api/orders/mine`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` }
+          }
+        );
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });

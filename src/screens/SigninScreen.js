@@ -30,10 +30,13 @@ export default function SigninScreen() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('/api/users/signin', {
-        email,
-        password
-      });
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/api/users/signin`,
+        {
+          email,
+          password
+        }
+      );
       ctxDispath({ type: 'USER_SIGN_IN', payload: data });
 
       if (rememberMe) {

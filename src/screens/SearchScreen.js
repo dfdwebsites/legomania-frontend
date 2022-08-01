@@ -87,7 +87,7 @@ export default function SearchScreen() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/products/search?query=${query}&page=${page}&category=${category}&price=${price}&rating=${rating}&order=${order}`
+          `${process.env.REACT_APP_SERVER_URL}/api/products/search?query=${query}&page=${page}&category=${category}&price=${price}&rating=${rating}&order=${order}`
         );
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
@@ -103,7 +103,9 @@ export default function SearchScreen() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await axios.get('/api/products/categories');
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/api/products/categories`
+        );
         setCategories(data);
       } catch (err) {
         toast.error(getError(err));

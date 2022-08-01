@@ -71,9 +71,12 @@ export default function ProductListScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/api/products/admin?page=${page}`, {
-          headers: { authorization: `Bearer ${userInfo.token}` }
-        });
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/api/products/admin?page=${page}`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` }
+          }
+        );
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
@@ -92,7 +95,7 @@ export default function ProductListScreen() {
       try {
         dispatch({ type: 'CREATE_REQUEST' });
         const { data } = await axios.post(
-          '/api/products',
+          `${process.env.REACT_APP_SERVER_URL}/api/products`,
           {},
           {
             headers: { authorization: `Bearer ${userInfo.token}` }
@@ -112,11 +115,14 @@ export default function ProductListScreen() {
     if (window.confirm('Are you sure to delete the product?')) {
       dispatch({ type: 'DELETE_REQUEST' });
       try {
-        await axios.delete(`/api/products/${product._id}`, {
-          headers: {
-            authorization: `Bearer ${userInfo.token}`
+        await axios.delete(
+          `${process.env.REACT_APP_SERVER_URL}/api/products/${product._id}`,
+          {
+            headers: {
+              authorization: `Bearer ${userInfo.token}`
+            }
           }
-        });
+        );
         toast.success('Product deleted successfully');
         dispatch({ type: 'DELETE_SUCCESS' });
       } catch (err) {

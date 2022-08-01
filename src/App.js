@@ -64,6 +64,9 @@ function App() {
     loading: false,
     error: ''
   });
+
+  console.log(process.env.REACT_APP_SERVER_URL);
+
   const avatarContainerRef = useRef(null);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -92,7 +95,9 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get('/api/products/categories');
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/api/products/categories`
+        );
         setCategories(data);
       } catch (err) {
         console.log(err);
@@ -106,7 +111,7 @@ function App() {
     try {
       dispatch({ type: 'UPDATE_REQUEST' });
       const { data } = await axios.put(
-        '/api/users/avatar',
+        `${process.env.REACT_APP_SERVER_URL}/api/users/avatar`,
         {
           email: userInfo.email,
           avatar: avatarImg

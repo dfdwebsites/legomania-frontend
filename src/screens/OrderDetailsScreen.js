@@ -74,7 +74,7 @@ export default function OrderDetailsScreen() {
       try {
         dispatch({ type: 'PAY_REQUEST' });
         const { data } = await axios.put(
-          `/api/orders/${order._id}/pay`,
+          `${process.env.REACT_APP_SERVER_URL}/api/orders/${order._id}/pay`,
           details,
           {
             headers: { authorization: `Bearer ${userInfo.token}` }
@@ -97,9 +97,12 @@ export default function OrderDetailsScreen() {
     const fetchOrder = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/orders/${orderId}`, {
-          headers: { authorization: `Bearer ${userInfo.token}` }
-        });
+        const { data } = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/api/orders/${orderId}`,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` }
+          }
+        );
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
@@ -116,11 +119,14 @@ export default function OrderDetailsScreen() {
       }
     } else {
       const loadPaypalScript = async () => {
-        const { data: clientId } = await axios.get('/api/keys/paypal', {
-          headers: {
-            authorization: `Bearer ${userInfo.token}`
+        const { data: clientId } = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/api/keys/paypal`,
+          {
+            headers: {
+              authorization: `Bearer ${userInfo.token}`
+            }
           }
-        });
+        );
 
         paypalDispatch({
           type: 'resetOptions',
