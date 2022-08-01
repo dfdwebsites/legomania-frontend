@@ -59,6 +59,7 @@ export default function Model(props) {
     return function () {
       t.scene.remove(obj);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [obj, t.scene]);
 
   updateObjectsVisibility();

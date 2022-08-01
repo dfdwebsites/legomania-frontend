@@ -517,6 +517,7 @@ export default function MinifigureScreen() {
   function hoverUncolor(r) {
     r.style.filter = '';
   }
+  console.log(selectedImage);
 
   return loading ? (
     <LoadingBox />
@@ -758,11 +759,16 @@ export default function MinifigureScreen() {
                   }}
                   onClick={() => setShowHat((prev) => !prev)}
                 >
-                  <img className="hat-img" src="/images/hatIcon.png" />
+                  <img
+                    className="hat-img"
+                    src="/images/hatIcon.png"
+                    alt="an icon of a hat"
+                  />
                   {showHat && (
                     <img
                       className="forbidden-img"
                       src="/images/forbidden.png"
+                      alt="forbidden icon"
                     />
                   )}
                 </button>
@@ -811,11 +817,16 @@ export default function MinifigureScreen() {
                   }}
                   onClick={() => setShowHat((prev) => !prev)}
                 >
-                  <img className="hat-img" src="/images/hatIcon.png" />
+                  <img
+                    className="hat-img"
+                    src="/images/hatIcon.png"
+                    alt="an icon of a hat"
+                  />
                   {showHat && (
                     <img
                       className="forbidden-img"
                       src="/images/forbidden.png"
+                      alt="forbidden icon"
                     />
                   )}
                 </button>

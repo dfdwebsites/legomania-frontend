@@ -363,6 +363,7 @@ function App() {
           </Nav>
         </div>
         <main>
+          {error && <p>{error}</p>}
           <Routes>
             <Route
               path="/product/create-your-own-minifigure"

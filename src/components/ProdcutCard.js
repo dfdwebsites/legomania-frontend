@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { Store } from '../Store';
 import CartConfirm from './CartConfirm';
-import { getOverlayDirection } from 'react-bootstrap/esm/helpers';
 
 export default function ProdcutCard(props) {
   const [addtoCartclicked, setAddtoCartclicked] = useState(false);

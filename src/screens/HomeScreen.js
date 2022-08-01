@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import Card from 'react-bootstrap/Card';
+
 import LoadingBox from '../components/LoadingBox';
 import ProdcutCard from '../components/ProdcutCard';
 import axios from 'axios';
@@ -10,8 +10,6 @@ import Button from 'react-bootstrap/esm/Button';
 import CanvasBG from '../components/CanvasBG';
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
-import CartConfirm from '../components/CartConfirm';
-import { LinkContainer } from 'react-router-bootstrap';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -77,6 +75,7 @@ export default function HomeScreen() {
           <LoadingBox />
         ) : (
           <>
+            {error && <p>{error}</p>}
             <div className="hero pt-5 px-5">
               <Container>
                 <Row className="justify-content-between">
