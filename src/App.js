@@ -65,8 +65,6 @@ function App() {
     error: ''
   });
 
-  console.log(process.env.REACT_APP_SERVER_URL);
-
   const avatarContainerRef = useRef(null);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);

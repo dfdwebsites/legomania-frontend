@@ -64,7 +64,6 @@ export default function HomeScreen() {
     return featuredProducts;
   };
 
-  console.log(products);
   return (
     <div>
       <div>
