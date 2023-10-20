@@ -10,6 +10,8 @@ import Button from 'react-bootstrap/esm/Button';
 import CanvasBG from '../components/CanvasBG';
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
+import data from '../data.js'
+import { toast } from 'react-toastify';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -26,10 +28,11 @@ function reducer(state, action) {
 
 export default function HomeScreen() {
   const [{ loading, products, error }, dispatch] = useReducer(reducer, {
-    products: [],
-    loading: true,
+    products: data.products,
+    loading: false,
     error: ''
   });
+  const [serverIsLoading, setServerIsLoading] = useState(true)
 
   const [activeProduct, setActiveProduct] = useState(0);
   const rightRef = useRef();
@@ -38,10 +41,13 @@ export default function HomeScreen() {
     const fetchdata = async () => {
       try {
         dispatch({ type: 'FETCH_REQUEST' });
-        const result = await axios.get(
+        axios.get(
           `${process.env.REACT_APP_SERVER_URL}/api/products`
-        );
-        dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
+        ).then(result => {
+          toast.success('Server woke app');
+          setServerIsLoading(false)
+          dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
+        })
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: err.message });
       }
@@ -76,6 +82,9 @@ export default function HomeScreen() {
           <>
             {error && <p>{error}</p>}
             <div className="hero pt-5 px-5">
+              {serverIsLoading && <div style={{position:"absolute",right: "10%",
+    color: "white",
+    fontSize: "25px"}}>As the server is still loading on the background the data are a sample </div>}
               <Container>
                 <Row className="justify-content-between">
                   {/* <Col xs={2} sm={2} md={2}>

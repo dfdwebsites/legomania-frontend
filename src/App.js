@@ -67,7 +67,7 @@ function App() {
 
   const avatarContainerRef = useRef(null);
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(["vecicles", "minifigure"]);
   const avatars = [
     '/images/avatar-1.png',
     '/images/avatar-2.png',
@@ -91,12 +91,13 @@ function App() {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = () => {
       try {
-        const { data } = await axios.get(
+       axios.get(
           `${process.env.REACT_APP_SERVER_URL}/api/products/categories`
-        );
-        setCategories(data);
+        ).then(data => {
+          setCategories(data.data);
+        });
       } catch (err) {
         console.log(err);
       }

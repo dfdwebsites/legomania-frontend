@@ -179,7 +179,7 @@ export default function ProductScreen() {
                 />
 
                 <OrbitControls />
-                <Environment preset="sunset" />
+                <Environment files='/images/city.hdr' />
               </Suspense>
               {/* <TestCubes position={[1.2, 0, 0]} /> */}
             </Canvas>

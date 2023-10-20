@@ -21,7 +21,6 @@ export default function Model(props) {
 
   const t = useThree();
 
-  console.log(t);
 
   const mesh = useRef(null);
   obj.rotation.z = Math.PI / 2;
